@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from openai import OpenAI
 from dotenv import load_dotenv
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
 load_dotenv()
@@ -75,11 +75,11 @@ movies["profile"] = (
     + movies["tag"]
 )
 
-# Converting movie profiles into vectors
+# Converting movie profiles into vectors (Done in generate_embeddings.py)
 
-vectorizer = TfidfVectorizer(stop_words="english")
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2",device="cuda")
 
-movie_vectors = vectorizer.fit_transform(movies["profile"])
+movie_vectors = np.load("movie_embeddings.npy")
 
 # Taking user input and extracting preferences using OpenAI 
 
@@ -102,7 +102,7 @@ preferences = response.output_text
 print("\nExtracted preferences : ")
 print(preferences)
 
-query_vector = vectorizer.transform([preferences])
+query_vector = embedding_model.encode([preferences])
 
 # Finding similarity between query and every movie
 
@@ -116,6 +116,10 @@ movies["final_score"] = (
     + 0.20 * movies["rating_score"]
     + 0.10 * movies["popularity_score"]
 )
+
+# Removing/ignoring movies with less than 200 rate count
+
+movies.loc[movies["rating_count"] < 200, "final_score"] = -1
 
 # Printing the 10 highest scoring movies
 

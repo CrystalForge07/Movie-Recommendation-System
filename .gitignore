@@ -4,3 +4,4 @@ __pycache__/
 data/
 data_inspection.py
 llm_approach.py
+movie_embeddings.npy

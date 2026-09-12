@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from openai import OpenAI
 from dotenv import load_dotenv
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
 load_dotenv()
@@ -76,9 +76,9 @@ movies["profile"] = (
     + movies["tag"]
 )
 
-vectorizer = TfidfVectorizer(stop_words="english")
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2",device="cuda")
 
-movie_vectors = vectorizer.fit_transform(movies["profile"])
+movie_vectors = np.load("movie_embeddings.npy")  # Data loaded from generate_embeddings.py
 
 query = input("What kind of movie are you looking for ? \n")
 
@@ -97,7 +97,7 @@ preferences = response.output_text
 print("\nExtracted preferences : ")
 print(preferences)
 
-query_vector = vectorizer.transform([preferences])
+query_vector = embedding_model.encode([preferences])
 
 similarities = cosine_similarity(
     query_vector,
