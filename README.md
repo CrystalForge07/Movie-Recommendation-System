@@ -3,10 +3,10 @@ A movie recommendation system that understands natural language user requirement
 
 ## Features -
 Natural language movie requests.  
-Both Traditional and LLM-based approaches.  
 OpenAI API for understanding user preferences.  
 Sentence Transformer for generating semantic embeddings.  
 Cosine similarity for matching preferences with movies.  
+Top movie recommendation based on similarity, rating and popularity.  
 
 ## Working -
 
