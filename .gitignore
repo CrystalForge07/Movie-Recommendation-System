@@ -1,7 +1,17 @@
-.env
+# Python environment
 .venv/
-__pycache__/    
+
+# API Keys
+.env
+
+# Data 
 data/
 data_inspection.py
-llm_approach.py
 movie_embeddings.npy
+
+# Testing files
+llm_approach.py
+testing_llm_approach.py
+testing_traditional_approach.py
+
+__pycache__/    
