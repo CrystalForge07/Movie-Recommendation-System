@@ -3,7 +3,7 @@ A movie recommendation system that understands natural language user requirement
 
 ## Features 
 - Natural language movie requests.
-- OpenAI API for understanding user preferences.
+- Groq API for understanding user preferences.
 - Sentence Transformer for generating semantic embeddings.
 - Cosine similarity for matching preferences with movies.
 - Top movie recommendation based on similarity, rating and popularity.
@@ -18,7 +18,7 @@ A movie recommendation system that understands natural language user requirement
 
 ### LLM approach -
 - User query  
-- OpenAI preference extraction  
+- Groq preference extraction  
 - Sentence Transformer embeddings  
 - Cosine similarity  
 - Rating + popularity  
@@ -30,7 +30,7 @@ A movie recommendation system that understands natural language user requirement
 - numpy  
 - Scikit-learn  
 - Sentence Transformers  
-- OpenAI API  
+- Groq API  
 
 ## Dataset -
 This project uses the MovieLens dataset from GroupLens.  
