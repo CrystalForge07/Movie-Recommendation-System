@@ -32,11 +32,7 @@ movies["profile"] = (
     + movies["tag"]
 )
 
-
-embedding_model = SentenceTransformer(
-    "all-MiniLM-L6-v2",
-    device="cuda"
-)
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2", device="cuda")
 
 # Generating embeddings
 movie_vectors = embedding_model.encode(
